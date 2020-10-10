@@ -8,10 +8,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LeagueApp {
+    //This class helps us to run the application from the MAIN class and is contained in the UI package.
+    //Took help from the TellerApp to get idea for some of the methods implemented below.
     private Team team;
     private League league;
     private Player player;
 
+    //EFFECTS: Constructs League App which creates a league object so that the application runs and
+    // other methods can be executed inside.
     public  LeagueApp() {
         Scanner in = new Scanner(System.in);
         league = new League();
@@ -25,6 +29,7 @@ public class LeagueApp {
 
     }
 
+    //EFFECTS: takes input and decides what to do from the display menu.
     public void decision() {
         Scanner in = new Scanner(System.in);
         displayMenu();
@@ -32,7 +37,7 @@ public class LeagueApp {
         processCommand(option);
     }
 
-
+    //EFFECTS: shows all the user stories and what the user wants to do.
     private void displayMenu() {
         System.out.println("\nSelect any of the options");
         System.out.println("\t1--> Add team.");
@@ -42,6 +47,7 @@ public class LeagueApp {
         System.out.println("\t5-->show all the teams.");
     }
 
+    //EFFECTS: selects the options from the user stories.
     private void processCommand(int option) {
         if (option == 1) {
             createAndAddTeam();
@@ -58,7 +64,7 @@ public class LeagueApp {
         }
     }
 
-
+    //EFFECTS: creates a team, names it, and adds it to an arraylist(inside a method in the League class).
     private void createAndAddTeam() {
         Scanner in = new Scanner(System.in);
         team = new Team();
@@ -68,6 +74,7 @@ public class LeagueApp {
         league.addTeam(team);
     }
 
+    //EFFECTS: selects a team and add a player with name to the team.
     private void selectTeamAndAddPlayers() {
         Scanner in = new Scanner(System.in);
         team = selectTeam();
@@ -79,11 +86,13 @@ public class LeagueApp {
 
     }
 
+    //EFFECTS: selects a team and shows all the players in the team.
     private void selectTeamAndViewPlayers() {
         team = selectTeam();
         showAllPlayers(team);
     }
 
+    //EFFECTS: selects a player and modify its stats.
     private void selectPlayerAndAddStats() {
         Scanner in = new Scanner(System.in);
         player = selectPlayer();
@@ -98,6 +107,7 @@ public class LeagueApp {
 
     }
 
+    //EFFECTS: selects and returns that Team.
     private Team selectTeam() {
         Scanner in = new Scanner(System.in);
         System.out.println("Select a team name:");
@@ -110,6 +120,7 @@ public class LeagueApp {
         return team;
     }
 
+    //EFFECTS: selects and returns that player.
     private Player selectPlayer() {
         Scanner in = new Scanner(System.in);
         System.out.println("Select a player name:");
@@ -122,6 +133,7 @@ public class LeagueApp {
         return player;
     }
 
+    //EFFECTS: prints out all the players stats of a team.
     private void showAllPlayers(Team team) {
         List<Player> players = team.getPlayers();
         int i = 0;
@@ -131,6 +143,7 @@ public class LeagueApp {
         }
     }
 
+    //EFFECTS: prints out all the teams in the league.
     private void showAllTeams() {
         List<Team> teams = league.getTeams();
         int i = 0;
