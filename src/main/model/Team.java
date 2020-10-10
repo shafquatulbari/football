@@ -7,6 +7,7 @@ public class Team {
 //This class represents information of football team and behaviour and attributes associated with it.
     private String name;
     private List<Player> players;
+
     //EFFECTS: constructs a Team with an empty ArrayList.
     public Team() {
         players = new ArrayList<>();
