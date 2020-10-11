@@ -71,6 +71,6 @@ public class Player {
     //EFFECTS: returns the String with all the stats of a player.
     public String playerInfo() {
         return "Player name: " + name + ". position: " + position
-                + ". age:" + age + ". GOALS: " + goals + ". ASSISTS: " + assists;
+                + ". age: " + age + ". GOALS: " + goals + ". ASSISTS: " + assists;
     }
 }

@@ -37,4 +37,9 @@ class TeamTest {
         team2.addPlayers(p2);
         assertEquals(team1.getPlayers(),team2.getPlayers());
     }
+
+    public void TeamNameTest() {
+        team1.setName("Juventus");
+        assertEquals("Juventus",team1.getName());
+    }
 }
