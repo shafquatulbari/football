@@ -45,7 +45,7 @@ class TeamTest {
     public void TeamNameTest() {
         team1.setName("Juventus");
         team2.setName("ManU");
-        assertEquals("Juventus",team1.getName());
+        assertTrue(team1.getName().equals("Juventus"));
         assertEquals("ManU",team2.getName());
     }
 }

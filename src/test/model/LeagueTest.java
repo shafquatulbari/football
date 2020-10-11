@@ -21,7 +21,8 @@ public class LeagueTest {
 
     @Test
     public void addTeamTest() {
-        assertTrue(league.getTeams().size()==0);
+        assertEquals(0,league2.getTeams().size());
+        assertEquals(0,league.getTeams().size());
         league.addTeam(team1);
         assertTrue(league.getTeams().size()==1);
         league.addTeam(team2);
