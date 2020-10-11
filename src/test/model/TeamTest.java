@@ -40,6 +40,8 @@ class TeamTest {
 
     public void TeamNameTest() {
         team1.setName("Juventus");
+        team2.setName("ManU");
         assertEquals("Juventus",team1.getName());
+        assertEquals("ManU",team2.getName());
     }
 }
