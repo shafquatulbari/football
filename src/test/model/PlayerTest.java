@@ -19,18 +19,12 @@ public class PlayerTest {
         player1.setAge(33);
 
         player2 = new Player();
-        player2.setName("Ronaldo");
-        player2.setPosition("ST");
-        player2.setGoals(90);
-        player2.setAssists(60);
-        player2.setAge(35);
+        player2.setAge(-30);
 
         assertEquals("Player name: " + player1.getName() + ". position: " + player1.getPosition()
                 + ". age: " + player1.getAge() + ". GOALS: " + player1.getGoals() +
                 ". ASSISTS: " + player1.getAssists(),player1.playerInfo());
-        assertEquals("Player name: " + player2.getName() + ". position: " + player2.getPosition()
-                + ". age: " + player2.getAge() + ". GOALS: " + player2.getGoals() +
-                ". ASSISTS: " + player2.getAssists(),player2.playerInfo());
+        assertEquals(0,player2.getAge());
 
     }
 

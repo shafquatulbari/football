@@ -18,10 +18,15 @@ public class Player {
         return age;
     }
 
+    //REQUIRES: age > 0
     //MODIFIES: this
     //EFFECTS: sets this.age to age.
     public void setAge(int age) {
-        this.age = age;
+        if (age < 0) {
+            this.age = 0;
+        } else {
+            this.age = age;
+        }
     }
 
     //EFFECTS: returns the position of the player.
