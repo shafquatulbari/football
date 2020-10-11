@@ -24,7 +24,10 @@ class TeamTest {
 
     @Test
     public void addPlayerTest() {
+        assertTrue(team2.getPlayers().size()==0);
+        assertTrue(team1.getPlayers().size()==0);
         team1.addPlayers(p1);
+        assertTrue(team1.getPlayers().size()==1);
         team1.addPlayers(p2);
         assertTrue(team1.getPlayers().size()==2);
     }
