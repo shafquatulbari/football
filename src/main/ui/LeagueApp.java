@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class LeagueApp {
     //This class helps us to run the application from the MAIN class and is contained in the UI package.
     //Took help from the TellerApp to get idea for some of the methods implemented below.
+    //Took help from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.
     private static final String JSON_STORE = "./data/League.json";
     private Team team;
     private League league;
@@ -168,7 +169,7 @@ public class LeagueApp {
         }
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the League to file
     private void saveLeague() {
         try {
             jsonWriter.open();
@@ -181,7 +182,7 @@ public class LeagueApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads League from file
     private void loadLeague() {
         try {
             league = jsonReader.read();

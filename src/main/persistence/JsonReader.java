@@ -47,8 +47,8 @@ public class JsonReader {
     }
 
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: league
+    // EFFECTS: parses teams from JSON object and adds them to League
     private void addTeams(League league, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("teams");
         for (Object json : jsonArray) {
@@ -57,7 +57,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: league
     // EFFECTS: parses Team from JSON object and adds it to League
     private void addTeam(League league, JSONObject jsonObject) {
         String name = jsonObject.getString("TeamName");
@@ -67,8 +67,8 @@ public class JsonReader {
         addPlayers(team,jsonObject);
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: team
+    // EFFECTS: parses Players from JSON object and adds them to Team
     private void addPlayers(Team team, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("list");
         for (Object json : jsonArray) {
@@ -77,6 +77,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: team
+    // EFFECTS: parses Player from JSON object and adds it to League
     private void addPlayer(Team team, JSONObject jsonObject) {
         String name = jsonObject.getString("Name");
         String position = jsonObject.getString("Position");

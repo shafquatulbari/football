@@ -19,3 +19,6 @@ Why is this project of interest to me:
 - As a user, I want to be able to select a team and view a list of the players on that team.
 - As a user, I want to be able to select a player on a team and add a new statistic for that player, for example, the number of goals scored in a game.
 - As a user, I want to be able to select a team and list all the players on that team.
+- As a user, I should be able to save the progress of my whole work from the session.
+- As a user, I should be able to load the saved file of my previous session's progress.
+

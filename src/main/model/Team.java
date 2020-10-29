@@ -38,6 +38,7 @@ public class Team {
         this.name = name;
     }
 
+
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("list", playersToJson());
