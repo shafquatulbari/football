@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,5 +26,22 @@ public class League {
         return teams;
     }
 
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("teams", teamsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns teams in this League as a JSON array
+    private JSONArray teamsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Team t : teams) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
+    }
 
 }

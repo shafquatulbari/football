@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class Team {
         return players;
     }
 
-    //EFFECTS: returns the name of the player.
+    //EFFECTS: returns the name of the Team.
     public String getName() {
         return name;
     }
@@ -33,5 +36,23 @@ public class Team {
     //EFFECTS: sets this.name to name.
     public void setName(String name) {
         this.name = name;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("list", playersToJson());
+        json.put("TeamName",name);
+        return json;
+    }
+
+    // EFFECTS: returns players in this Team as a JSON array
+    private JSONArray playersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : players) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 }

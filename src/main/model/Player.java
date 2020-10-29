@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 public class Player {
  //This class represents a Football Player's stats and has all the attributes and behaviours associated with it.
     int age;
@@ -11,6 +13,14 @@ public class Player {
     //EFFECTS: creates an empty constructor for Player
     public Player() {
 
+    }
+
+    public Player(String name, int age, int assists, int goals, String position) {
+        this.name = name;
+        this.assists = assists;
+        this.goals = goals;
+        this.position = position;
+        this.age = age;
     }
 
     //EFFECTS: returns the age of the player.
@@ -77,5 +87,15 @@ public class Player {
     public String playerInfo() {
         return "Player name: " + name + ". position: " + position
                 + ". age: " + age + ". GOALS: " + goals + ". ASSISTS: " + assists;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Name",name);
+        json.put("Assists",assists);
+        json.put("Goals",goals);
+        json.put("Age",age);
+        json.put("Position",position);
+        return json;
     }
 }

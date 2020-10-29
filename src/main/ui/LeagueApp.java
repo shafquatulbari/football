@@ -3,21 +3,30 @@ package ui;
 import model.League;
 import model.Player;
 import model.Team;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class LeagueApp {
     //This class helps us to run the application from the MAIN class and is contained in the UI package.
     //Took help from the TellerApp to get idea for some of the methods implemented below.
+    private static final String JSON_STORE = "./data/League.json";
     private Team team;
     private League league;
     private Player player;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: Constructs League App which creates a league object so that the application runs and
     // other methods can be executed inside.
     public  LeagueApp() {
         Scanner in = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         league = new League();
         System.out.println("quit or play? q/p");
         String decision = in.next();
@@ -45,6 +54,8 @@ public class LeagueApp {
         System.out.println("\t3-->select a team and view a list of the players on that team.");
         System.out.println("\t4-->select a player on a team and add a new statistic for that player.");
         System.out.println("\t5-->show all the teams.");
+        System.out.println("\t6-->SAVE.....");
+        System.out.println("\t7-->LOAD");
     }
 
     //EFFECTS: selects the options from the user stories.
@@ -59,6 +70,10 @@ public class LeagueApp {
             selectPlayerAndAddStats();
         } else if (option == 5) {
             showAllTeams();
+        } else if (option == 6) {
+            saveLeague();
+        } else if (option == 7) {
+            loadLeague();
         } else {
             System.out.println("Selection not valid.");
         }
@@ -152,6 +167,30 @@ public class LeagueApp {
             System.out.println(i + ". " + team.getName() + " \n");
         }
     }
+
+    // EFFECTS: saves the workroom to file
+    private void saveLeague() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(league);
+            jsonWriter.close();
+            System.out.println("Saved LeagueApp to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadLeague() {
+        try {
+            league = jsonReader.read();
+            System.out.println("Loaded LeagueApp from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 
 
 }
