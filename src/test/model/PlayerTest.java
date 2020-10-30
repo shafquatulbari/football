@@ -13,7 +13,6 @@ public class PlayerTest {
     public void playerInfoTest() {
         player1 = new Player();
         player1.setName("Messi");
-        player1.setPosition("ST");
         player1.setGoals(100);
         player1.setAssists(50);
         player1.setAge(33);
@@ -21,7 +20,7 @@ public class PlayerTest {
         player2 = new Player();
         player2.setAge(-30);
 
-        assertEquals("Player name: " + player1.getName() + ". position: " + player1.getPosition()
+        assertEquals("Player name: " + player1.getName()
                 + ". age: " + player1.getAge() + ". GOALS: " + player1.getGoals() +
                 ". ASSISTS: " + player1.getAssists(),player1.playerInfo());
         assertEquals(0,player2.getAge());

@@ -81,11 +81,14 @@ public class JsonReader {
     // EFFECTS: parses Player from JSON object and adds it to League
     private void addPlayer(Team team, JSONObject jsonObject) {
         String name = jsonObject.getString("Name");
-        String position = jsonObject.getString("Position");
         int age = jsonObject.getInt("Age");
         int assists = jsonObject.getInt("Assists");
         int goals = jsonObject.getInt("Goals");
-        Player player = new Player(name, age, assists, goals, position);
+        Player player = new Player();
+        player.setAge(age);
+        player.setGoals(goals);
+        player.setAssists(assists);
+        player.setName(name);
         team.addPlayers(player);
     }
 

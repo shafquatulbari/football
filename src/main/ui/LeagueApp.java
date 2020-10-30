@@ -116,8 +116,6 @@ public class LeagueApp {
         player.setGoals(in.nextInt());
         System.out.println("Number of assists:");
         player.setAssists(in.nextInt());
-        System.out.println("Position:");
-        player.setPosition(in.nextLine());
         System.out.println("Age of Player:");
         player.setAge(in.nextInt());
 

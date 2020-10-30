@@ -1,11 +1,11 @@
 package model;
 
 import org.json.JSONObject;
+import persistence.Writable;
 
-public class Player {
+public class Player implements Writable {
  //This class represents a Football Player's stats and has all the attributes and behaviours associated with it.
     int age;
-    String position;
     String name;
     int goals;
     int assists;
@@ -13,14 +13,6 @@ public class Player {
     //EFFECTS: creates an empty constructor for Player
     public Player() {
 
-    }
-
-    public Player(String name, int age, int assists, int goals, String position) {
-        this.name = name;
-        this.assists = assists;
-        this.goals = goals;
-        this.position = position;
-        this.age = age;
     }
 
     //EFFECTS: returns the age of the player.
@@ -37,17 +29,6 @@ public class Player {
         } else {
             this.age = age;
         }
-    }
-
-    //EFFECTS: returns the position of the player.
-    public String getPosition() {
-        return position;
-    }
-
-    //MODIFIES: this
-    //EFFECTS: sets this.position to position.
-    public void setPosition(String position) {
-        this.position = position;
     }
 
     //EFFECTS: returns the name of the player.
@@ -85,8 +66,7 @@ public class Player {
 
     //EFFECTS: returns the String with all the stats of a player.
     public String playerInfo() {
-        return "Player name: " + name + ". position: " + position
-                + ". age: " + age + ". GOALS: " + goals + ". ASSISTS: " + assists;
+        return "Player name: " + name + ". age: " + age + ". GOALS: " + goals + ". ASSISTS: " + assists;
     }
 
     public JSONObject toJson() {
@@ -95,7 +75,6 @@ public class Player {
         json.put("Assists",assists);
         json.put("Goals",goals);
         json.put("Age",age);
-        json.put("Position",position);
         return json;
     }
 }

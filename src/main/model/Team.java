@@ -2,11 +2,12 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team {
+public class Team implements Writable {
 //This class represents information of football team and behaviour and attributes associated with it.
     private String name;
     private List<Player> players;
