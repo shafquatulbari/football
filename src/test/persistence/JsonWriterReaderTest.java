@@ -71,4 +71,22 @@ public class JsonWriterReaderTest extends JsonTest{
         }
     }
 
+    @Test
+    void testWriterEmptyTeam() {
+        try {
+            Team team = new Team();
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom2.json");
+            writer.open();
+            writer.writeTeam(team);
+            writer.close();
+
+            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom2.json");
+            team = reader.readTeam();
+            assertEquals(0, team.getPlayers().size());
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+
 }

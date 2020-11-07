@@ -2,6 +2,9 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
@@ -27,5 +30,25 @@ public class PlayerTest {
 
     }
 
+    @Test
+    public void highestGoals() {
+        Team t1 = new Team();
+        player1 = new Player();
+        player2 = new Player();
+        Player player3 = new Player();
+        player3.setGoals(5);
+        player2.setGoals(5);
+        player1.setGoals(10);
+        t1.addPlayers(player1);
+        t1.addPlayers(player3);
+        t1.addPlayers(player2);
+        int result1 = player1.compareTo(player2);
+        int result2 = player2.compareTo(player3);
+        int result3 = player2.compareTo(player1);
+        assertTrue(result1 == 1);
+        assertTrue(result2 == 0);
+        assertTrue(result3 == -1);
+
+    }
 
 }
