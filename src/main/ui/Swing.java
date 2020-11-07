@@ -80,6 +80,7 @@ public class Swing extends JFrame implements ActionListener {
         } else if (e.getSource() == highest) {
             Player max = Collections.max(team.getPlayers());
             topGoalScorer.setText("Top goal scorer is:" + max.getName());
+            soundEffect("./data/Whistle.wav");
         }
 
     }
