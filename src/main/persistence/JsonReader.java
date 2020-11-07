@@ -46,7 +46,6 @@ public class JsonReader {
         return league;
     }
 
-
     // MODIFIES: league
     // EFFECTS: parses teams from JSON object and adds them to League
     private void addTeams(League league, JSONObject jsonObject) {

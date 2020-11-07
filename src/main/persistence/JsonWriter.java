@@ -1,6 +1,7 @@
 package persistence;
 
 import model.League;
+import model.Team;
 import org.json.JSONObject;
 
 import java.io.File;
