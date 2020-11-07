@@ -28,6 +28,16 @@ public class JsonReader {
         return parseLeague(jsonObject);
     }
 
+    // EFFECTS: reads workroom from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public Team readTeam() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseTeam(jsonObject);
+    }
+
+
+
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
@@ -44,6 +54,13 @@ public class JsonReader {
         League league = new League();
         addTeams(league, jsonObject);
         return league;
+    }
+
+    // EFFECTS: parses League from JSON object and returns it
+    private Team parseTeam(JSONObject jsonObject) {
+        Team team = new Team();
+        addPlayers(team, jsonObject);
+        return team;
     }
 
     // MODIFIES: league

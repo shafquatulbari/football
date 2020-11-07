@@ -24,7 +24,7 @@ public class LeagueApp {
 
     //EFFECTS: Constructs League App which creates a league object so that the application runs and
     // other methods can be executed inside.
-    public  LeagueApp() {
+    public LeagueApp() {
         Scanner in = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);

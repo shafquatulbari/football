@@ -1,6 +1,5 @@
 package ui;
 
-import model.League;
 import model.Player;
 import model.Team;
 import persistence.JsonReader;
@@ -16,12 +15,11 @@ import java.io.IOException;
 
 public class Swing extends JFrame implements ActionListener {
 
-    private static final String JSON_STORE = "./data/League.json";
-    private Team team = new Team();
-    private League league = new League();
+    private static final String JSON_STORE = "./data/Swing.json";
+    private Team team;
     private Player player;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private JsonWriter jsonWriter1;
+    private JsonReader jsonReader1;
 
     DefaultTableModel dtm;
     String [] header = new String[]{"Player Name","Age","Goal Scored","Assists"};
@@ -42,9 +40,9 @@ public class Swing extends JFrame implements ActionListener {
 
     public Swing() {
         super("League App");
-        jsonReader = new JsonReader(JSON_STORE);
-        jsonWriter = new JsonWriter(JSON_STORE);
-        league.addTeam(team);
+        team = new Team();
+        jsonReader1 = new JsonReader(JSON_STORE);
+        jsonWriter1 = new JsonWriter(JSON_STORE);
         setSize(600,600);
         setResizable(true);
         setLayout(new FlowLayout());
@@ -55,25 +53,11 @@ public class Swing extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        int goal1 = Integer.parseInt(goalText.getText());
-        int assist1 = Integer.parseInt(assistText.getText());
-        String name1 = nameText.getText();
-        int age1 = Integer.parseInt(ageText.getText());
-
         if (e.getSource() == addPlayer) {
-            player = new Player();
-            player.setAge(age1);
-            player.setName(name1);
-            player.setAssists(assist1);
-            player.setGoals(goal1);
-            team.addPlayers(player);
-            displayPlayerDetails();
-        }
-        if (e.getSource() == save) {
+            initializePlayer();
+        } else if (e.getSource() == save) {
             save();
-        }
-        if (e.getSource() == load) {
+        } else if (e.getSource() == load) {
             load();
         }
 
@@ -104,6 +88,8 @@ public class Swing extends JFrame implements ActionListener {
         add(save);
         add(load);
         addPlayer.addActionListener(this);
+        save.addActionListener(this);
+        load.addActionListener(this);
         dtm = new DefaultTableModel(header,0);
         table.setModel(dtm);
         add(table);
@@ -112,9 +98,9 @@ public class Swing extends JFrame implements ActionListener {
     // EFFECTS: saves the League to file
     private void save() {
         try {
-            jsonWriter.open();
-            jsonWriter.write(league);
-            jsonWriter.close();
+            jsonWriter1.open();
+            jsonWriter1.writeTeam(team);
+            jsonWriter1.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -124,10 +110,25 @@ public class Swing extends JFrame implements ActionListener {
     // EFFECTS: loads League from file
     private void load() {
         try {
-            league = jsonReader.read();
+            team = jsonReader1.readTeam();
+            displayPlayerDetails();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void initializePlayer() {
+        int goal1 = Integer.parseInt(goalText.getText());
+        int assist1 = Integer.parseInt(assistText.getText());
+        String name1 = nameText.getText();
+        int age1 = Integer.parseInt(ageText.getText());
+        player = new Player();
+        player.setAge(age1);
+        player.setName(name1);
+        player.setAssists(assist1);
+        player.setGoals(goal1);
+        team.addPlayers(player);
+        displayPlayerDetails();
     }
 
 }
