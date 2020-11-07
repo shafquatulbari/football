@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 
 public class Swing extends JFrame implements ActionListener {
 
@@ -32,10 +33,12 @@ public class Swing extends JFrame implements ActionListener {
     JButton addPlayer = new JButton("Add Player and Set Stats");
     JButton save = new JButton("Save");
     JButton load = new JButton("Load");
+    JButton highest = new JButton("Click");
     JLabel age = new JLabel("Age:");
     JLabel goals = new JLabel("Goals:");
     JLabel assists = new JLabel("Assists");
     JLabel name = new JLabel("Player Name");
+    JLabel topGoalScorer = new JLabel("Press Click to see top goal scorer");
 
     JTextField nameText = new JTextField(10);
     JTextField assistText = new JTextField(3);
@@ -44,6 +47,8 @@ public class Swing extends JFrame implements ActionListener {
 
     JLabel background;
 
+    //EFFECTS: Constructs Swing which creates a Team object so that the application runs and
+    // other methods can be executed inside for example add players to the team which can be shown on a table
     public Swing() {
         super("League App");
         team = new Team();
@@ -72,10 +77,14 @@ public class Swing extends JFrame implements ActionListener {
         } else if (e.getSource() == load) {
             load();
             soundEffect("./data/Whistle.wav");
+        } else if (e.getSource() == highest) {
+            Player max = Collections.max(team.getPlayers());
+            topGoalScorer.setText("Top goal scorer is:" + max.getName());
         }
 
     }
 
+    //EFFECTS: display all the players details from a Team on a table
     private void displayPlayerDetails() {
         dtm.setRowCount(0);
         dtm.addRow(header);
@@ -87,8 +96,8 @@ public class Swing extends JFrame implements ActionListener {
 
     }
 
+    //EFFECTS: initializes and adds buttons/listeners/text fields etc to JFrame
     private void initialize() {
-        table = new JTable();
         add(name);
         add(nameText);
         add(age);
@@ -103,12 +112,13 @@ public class Swing extends JFrame implements ActionListener {
         addPlayer.addActionListener(this);
         save.addActionListener(this);
         load.addActionListener(this);
-        dtm = new DefaultTableModel(header,0);
-        table.setModel(dtm);
-        add(table);
+        highest.addActionListener(this);
+        initializeTable();
+        add(highest);
+        add(topGoalScorer);
     }
 
-    // EFFECTS: saves the League to file
+    // EFFECTS: saves the Team to file
     private void save() {
         try {
             jsonWriter1.open();
@@ -120,7 +130,7 @@ public class Swing extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads League from file
+    // EFFECTS: loads Team from file
     private void load() {
         try {
             team = jsonReader1.readTeam();
@@ -130,6 +140,7 @@ public class Swing extends JFrame implements ActionListener {
         }
     }
 
+    //EFFECTS: initializes Player object and adds player to the team
     private void initializePlayer() {
         int goal1 = Integer.parseInt(goalText.getText());
         int assist1 = Integer.parseInt(assistText.getText());
@@ -144,6 +155,15 @@ public class Swing extends JFrame implements ActionListener {
         displayPlayerDetails();
     }
 
+    //EFFECTS: initializes and adds a JTable object
+    private void initializeTable() {
+        table = new JTable();
+        dtm = new DefaultTableModel(header,0);
+        table.setModel(dtm);
+        add(table);
+    }
+
+    //EFFECTS: reads sound file from filepath
     private void soundEffect(String filepath) {
         InputStream music;
         try {
@@ -154,5 +174,7 @@ public class Swing extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
+
+
 
 }

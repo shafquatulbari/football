@@ -3,7 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-public class Player implements Writable {
+public class Player implements Writable, Comparable<Player> {
  //This class represents a Football Player's stats and has all the attributes and behaviours associated with it.
     int age;
     String name;
@@ -77,4 +77,15 @@ public class Player implements Writable {
         json.put("Age",age);
         return json;
     }
+
+    @Override
+    public int compareTo(Player o) {
+        if (this.getGoals() > o.getGoals()) {
+            return 1;
+        } else if (this.getGoals() < o.getGoals()) {
+            return -1;
+        }
+        return 0;
+    }
+
 }

@@ -33,7 +33,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of League to file
+    // EFFECTS: writes JSON representation of Team to file
     public void writeTeam(Team team) {
         JSONObject json = team.toJson();
         saveToFile(json.toString(TAB));
