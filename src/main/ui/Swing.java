@@ -4,14 +4,18 @@ import model.Player;
 import model.Team;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Swing extends JFrame implements ActionListener {
 
@@ -38,15 +42,21 @@ public class Swing extends JFrame implements ActionListener {
     JTextField goalText = new JTextField(3);
     JTextField ageText = new JTextField(3);
 
+    JLabel background;
+
     public Swing() {
         super("League App");
         team = new Team();
         jsonReader1 = new JsonReader(JSON_STORE);
         jsonWriter1 = new JsonWriter(JSON_STORE);
-        setSize(600,600);
+        setSize(500,1000);
         setResizable(true);
         setLayout(new FlowLayout());
+        ImageIcon img = new ImageIcon("./data/soccer.jpg");
         initialize();
+        background = new JLabel("",img,JLabel.CENTER);
+        background.setBounds(0,0,1000,1000);
+        add(background);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -55,10 +65,13 @@ public class Swing extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addPlayer) {
             initializePlayer();
+            soundEffect("./data/Whistle.wav");
         } else if (e.getSource() == save) {
             save();
+            soundEffect("./data/Whistle.wav");
         } else if (e.getSource() == load) {
             load();
+            soundEffect("./data/Whistle.wav");
         }
 
     }
@@ -117,7 +130,7 @@ public class Swing extends JFrame implements ActionListener {
         }
     }
 
-    public void initializePlayer() {
+    private void initializePlayer() {
         int goal1 = Integer.parseInt(goalText.getText());
         int assist1 = Integer.parseInt(assistText.getText());
         String name1 = nameText.getText();
@@ -129,6 +142,17 @@ public class Swing extends JFrame implements ActionListener {
         player.setGoals(goal1);
         team.addPlayers(player);
         displayPlayerDetails();
+    }
+
+    private void soundEffect(String filepath) {
+        InputStream music;
+        try {
+            music = new FileInputStream(filepath);
+            AudioStream audios = new AudioStream(music);
+            AudioPlayer.player.start(audios);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
