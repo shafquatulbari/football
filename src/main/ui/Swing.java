@@ -37,6 +37,7 @@ public class Swing extends JFrame implements ActionListener {
     JLabel assists = new JLabel("Assists");
     JLabel name = new JLabel("Player Name");
     JLabel bestPlayer = new JLabel("Best Player yet to be decided based on goals and assists!");
+    JButton goBack = new JButton("Go back");
 
     JTextField nameText = new JTextField(10);
     JTextField assistText = new JTextField(3);
@@ -50,18 +51,7 @@ public class Swing extends JFrame implements ActionListener {
         team = new Team();
         jsonReader1 = new JsonReader(JSON_STORE);
         jsonWriter1 = new JsonWriter(JSON_STORE);
-        try {
-            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./data/Soccer.png")))));
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-        pack();
-        setSize(500,800);
-        setResizable(false);
-        setLayout(new FlowLayout());
-        initialize();
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame();
     }
 
     @Override
@@ -77,6 +67,8 @@ public class Swing extends JFrame implements ActionListener {
             soundEffect("./data/Whistle.wav");
         } else if (e.getSource() == highest) {
             showTopGoalScorer();
+        } else if (e.getSource() == goBack) {
+            mainFrame();
         }
 
     }
@@ -113,6 +105,7 @@ public class Swing extends JFrame implements ActionListener {
         save.addActionListener(this);
         load.addActionListener(this);
         highest.addActionListener(this);
+        goBack.addActionListener(this);
         initializeTable();
         add(highest);
         add(bestPlayer);
@@ -192,6 +185,22 @@ public class Swing extends JFrame implements ActionListener {
                 + max.getGoals() + " goals and has assisted " + max.getAssists() + " times.",Font.BOLD,20));
         bestPlayer.setForeground(Color.RED);
         soundEffect("./data/Cheer.wav");
+        add(goBack);
+    }
+
+    private void mainFrame() {
+        try {
+            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./data/Soccer.png")))));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        pack();
+        setSize(600,850);
+        setResizable(false);
+        setLayout(new FlowLayout());
+        initialize();
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }
