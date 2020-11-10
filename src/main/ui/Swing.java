@@ -7,15 +7,13 @@ import persistence.JsonWriter;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Collections;
 
 public class Swing extends JFrame implements ActionListener {
@@ -54,14 +52,16 @@ public class Swing extends JFrame implements ActionListener {
         team = new Team();
         jsonReader1 = new JsonReader(JSON_STORE);
         jsonWriter1 = new JsonWriter(JSON_STORE);
-        setSize(500,1000);
-        setResizable(true);
+        try {
+            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./data/Soccer.png")))));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        pack();
+        setSize(500,800);
+        setResizable(false);
         setLayout(new FlowLayout());
-        ImageIcon img = new ImageIcon("./data/soccer.jpg");
         initialize();
-        background = new JLabel("",img,JLabel.CENTER);
-        background.setBounds(0,0,1000,1000);
-        add(background);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
