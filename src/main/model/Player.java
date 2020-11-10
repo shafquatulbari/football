@@ -80,9 +80,9 @@ public class Player implements Writable, Comparable<Player> {
 
     @Override
     public int compareTo(Player o) {
-        if (this.getGoals() > o.getGoals()) {
+        if (this.getGoals() + this.getAssists() > o.getGoals() + o.getAssists()) {
             return 1;
-        } else if (this.getGoals() < o.getGoals()) {
+        } else if (this.getGoals() + this.getAssists() < o.getGoals() + o.getAssists()) {
             return -1;
         }
         return 0;

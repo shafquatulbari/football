@@ -31,12 +31,12 @@ public class Swing extends JFrame implements ActionListener {
     JButton addPlayer = new JButton("Add Player and Set Stats");
     JButton save = new JButton("Save");
     JButton load = new JButton("Load");
-    JButton highest = new JButton("Top Goal Scorer");
+    JButton highest = new JButton("Best Player!");
     JLabel age = new JLabel("Age:");
     JLabel goals = new JLabel("Goals:");
     JLabel assists = new JLabel("Assists");
     JLabel name = new JLabel("Player Name");
-    JLabel topGoalScorer = new JLabel("Top Goal Scorer not yet decided!");
+    JLabel bestPlayer = new JLabel("Best Player yet to be decided based on goals and assists!");
 
     JTextField nameText = new JTextField(10);
     JTextField assistText = new JTextField(3);
@@ -95,7 +95,9 @@ public class Swing extends JFrame implements ActionListener {
 
     //EFFECTS: initializes and adds buttons/listeners/text fields etc to JFrame
     private void initialize() {
-        topGoalScorer.setFont(new Font("Top Goal Scorer not yet decided!",Font.BOLD,15));
+        bestPlayer.setFont(new Font("Best Player yet to be decided based on goals and assists!",
+                Font.BOLD,15));
+        bestPlayer.setForeground(Color.RED);
         add(name);
         add(nameText);
         add(age);
@@ -113,7 +115,7 @@ public class Swing extends JFrame implements ActionListener {
         highest.addActionListener(this);
         initializeTable();
         add(highest);
-        add(topGoalScorer);
+        add(bestPlayer);
     }
 
     // EFFECTS: saves the Team to file
@@ -182,11 +184,13 @@ public class Swing extends JFrame implements ActionListener {
         }
         setSize(1000,1000);
         setLayout(new FlowLayout());
-        add(topGoalScorer);
+        add(bestPlayer);
         Player max = Collections.max(team.getPlayers());
-        topGoalScorer.setText("Top goal scorer is: " + max.getName());
-        topGoalScorer.setFont(new Font("Top goal scorer is:" + max.getName(),Font.BOLD,30));
-        topGoalScorer.setForeground(Color.RED);
+        bestPlayer.setText("Best Player is: " + max.getName() + " who scored " + max.getGoals()
+                + " goals and has assisted " + max.getAssists() + " times.");
+        bestPlayer.setFont(new Font("Best Player is: " + max.getName() + " who scored "
+                + max.getGoals() + " goals and has assisted " + max.getAssists() + " times.",Font.BOLD,20));
+        bestPlayer.setForeground(Color.RED);
         soundEffect("./data/Cheer.wav");
     }
 

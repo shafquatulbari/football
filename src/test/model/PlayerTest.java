@@ -37,8 +37,11 @@ public class PlayerTest {
         player2 = new Player();
         Player player3 = new Player();
         player3.setGoals(5);
+        player3.setAssists(1);
         player2.setGoals(5);
+        player2.setAssists(1);
         player1.setGoals(10);
+        player1.setAssists(10);
         t1.addPlayers(player1);
         t1.addPlayers(player3);
         t1.addPlayers(player2);
