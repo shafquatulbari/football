@@ -173,6 +173,7 @@ public class Swing extends JFrame implements ActionListener {
         }
     }
 
+    //EFFECTS: changes background image, decides and shows top goal scorer on screen with audio/visual effects.
     private void showTopGoalScorer() {
         try {
             setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./data/Trophy.jpg")))));
