@@ -43,8 +43,6 @@ public class Swing extends JFrame implements ActionListener {
     JTextField goalText = new JTextField(3);
     JTextField ageText = new JTextField(3);
 
-    JLabel background;
-
     //EFFECTS: Constructs Swing which creates a Team object so that the application runs and
     // other methods can be executed inside for example add players to the team which can be shown on a table
     public Swing() {
@@ -78,9 +76,7 @@ public class Swing extends JFrame implements ActionListener {
             load();
             soundEffect("./data/Whistle.wav");
         } else if (e.getSource() == highest) {
-            Player max = Collections.max(team.getPlayers());
-            topGoalScorer.setText("Top goal scorer is:" + max.getName());
-            soundEffect("./data/Whistle.wav");
+            showTopGoalScorer();
         }
 
     }
@@ -99,6 +95,7 @@ public class Swing extends JFrame implements ActionListener {
 
     //EFFECTS: initializes and adds buttons/listeners/text fields etc to JFrame
     private void initialize() {
+        topGoalScorer.setFont(new Font("Top Goal Scorer not yet decided!",Font.BOLD,15));
         add(name);
         add(nameText);
         add(age);
@@ -176,6 +173,20 @@ public class Swing extends JFrame implements ActionListener {
         }
     }
 
-
+    private void showTopGoalScorer() {
+        try {
+            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./data/Trophy.jpg")))));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        setSize(1000,1000);
+        setLayout(new FlowLayout());
+        add(topGoalScorer);
+        Player max = Collections.max(team.getPlayers());
+        topGoalScorer.setText("Top goal scorer is: " + max.getName());
+        topGoalScorer.setFont(new Font("Top goal scorer is:" + max.getName(),Font.BOLD,30));
+        topGoalScorer.setForeground(Color.RED);
+        soundEffect("./data/Cheer.wav");
+    }
 
 }
