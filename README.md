@@ -22,3 +22,12 @@ Why is this project of interest to me:
 - As a user, I should be able to save the progress of my whole work from the session.
 - As a user, I should be able to load the saved file of my previous session's progress.
 
+
+## User Stories for Phase 3:
+- As a user, I want to be able to add players to the team by setting their stats.
+- As a user, I should be able to save the progress of my whole work from the session.
+- As a user, I should be able to load the saved file of my previous session's progress.
+- As a user, I want to be able to click a button to reveal the top goal scorer in the team.
+
+
+

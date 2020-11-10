@@ -33,12 +33,12 @@ public class Swing extends JFrame implements ActionListener {
     JButton addPlayer = new JButton("Add Player and Set Stats");
     JButton save = new JButton("Save");
     JButton load = new JButton("Load");
-    JButton highest = new JButton("Click");
+    JButton highest = new JButton("Top Goal Scorer");
     JLabel age = new JLabel("Age:");
     JLabel goals = new JLabel("Goals:");
     JLabel assists = new JLabel("Assists");
     JLabel name = new JLabel("Player Name");
-    JLabel topGoalScorer = new JLabel("Press Click to see top goal scorer");
+    JLabel topGoalScorer = new JLabel("Top Goal Scorer not yet decided!");
 
     JTextField nameText = new JTextField(10);
     JTextField assistText = new JTextField(3);
