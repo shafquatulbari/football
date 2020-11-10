@@ -37,7 +37,6 @@ public class Swing extends JFrame implements ActionListener {
     JLabel assists = new JLabel("Assists");
     JLabel name = new JLabel("Player Name");
     JLabel bestPlayer = new JLabel("Best Player yet to be decided based on goals and assists!");
-    JButton goBack = new JButton("Go back");
 
     JTextField nameText = new JTextField(10);
     JTextField assistText = new JTextField(3);
@@ -67,10 +66,7 @@ public class Swing extends JFrame implements ActionListener {
             soundEffect("./data/Whistle.wav");
         } else if (e.getSource() == highest) {
             showTopGoalScorer();
-        } else if (e.getSource() == goBack) {
-            mainFrame();
         }
-
     }
 
     //EFFECTS: display all the players details from a Team on a table
@@ -101,14 +97,10 @@ public class Swing extends JFrame implements ActionListener {
         add(addPlayer);
         add(save);
         add(load);
-        addPlayer.addActionListener(this);
-        save.addActionListener(this);
-        load.addActionListener(this);
-        highest.addActionListener(this);
-        goBack.addActionListener(this);
-        initializeTable();
         add(highest);
         add(bestPlayer);
+        initializeTable();
+
     }
 
     // EFFECTS: saves the Team to file
@@ -185,9 +177,10 @@ public class Swing extends JFrame implements ActionListener {
                 + max.getGoals() + " goals and has assisted " + max.getAssists() + " times.",Font.BOLD,20));
         bestPlayer.setForeground(Color.RED);
         soundEffect("./data/Cheer.wav");
-        add(goBack);
+        add(save);
     }
 
+    //EFFECTS: initializes/displays the main screen with buttons/options/actions user can use/perform
     private void mainFrame() {
         try {
             setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./data/Soccer.png")))));
@@ -198,6 +191,10 @@ public class Swing extends JFrame implements ActionListener {
         setSize(600,850);
         setResizable(false);
         setLayout(new FlowLayout());
+        addPlayer.addActionListener(this);
+        save.addActionListener(this);
+        load.addActionListener(this);
+        highest.addActionListener(this);
         initialize();
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
