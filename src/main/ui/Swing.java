@@ -37,6 +37,7 @@ public class Swing extends JFrame implements ActionListener {
     JLabel assists = new JLabel("Assists");
     JLabel name = new JLabel("Player Name");
     JLabel bestPlayer = new JLabel("Best Player yet to be decided based on goals and assists!");
+    JButton goBack = new JButton("Go Back");
 
     JTextField nameText = new JTextField(10);
     JTextField assistText = new JTextField(3);
@@ -50,7 +51,13 @@ public class Swing extends JFrame implements ActionListener {
         team = new Team();
         jsonReader1 = new JsonReader(JSON_STORE);
         jsonWriter1 = new JsonWriter(JSON_STORE);
+        addPlayer.addActionListener(this);
+        save.addActionListener(this);
+        load.addActionListener(this);
+        highest.addActionListener(this);
+        goBack.addActionListener(this);
         mainFrame();
+        initialize();
     }
 
     @Override
@@ -66,6 +73,9 @@ public class Swing extends JFrame implements ActionListener {
             soundEffect("./data/Whistle.wav");
         } else if (e.getSource() == highest) {
             showTopGoalScorer();
+        } else if (e.getSource() == goBack) {
+            mainFrame();
+            initialize();
         }
     }
 
@@ -177,7 +187,7 @@ public class Swing extends JFrame implements ActionListener {
                 + max.getGoals() + " goals and has assisted " + max.getAssists() + " times.",Font.BOLD,20));
         bestPlayer.setForeground(Color.RED);
         soundEffect("./data/Cheer.wav");
-        add(save);
+        add(goBack);
     }
 
     //EFFECTS: initializes/displays the main screen with buttons/options/actions user can use/perform
@@ -191,11 +201,6 @@ public class Swing extends JFrame implements ActionListener {
         setSize(600,850);
         setResizable(false);
         setLayout(new FlowLayout());
-        addPlayer.addActionListener(this);
-        save.addActionListener(this);
-        load.addActionListener(this);
-        highest.addActionListener(this);
-        initialize();
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
