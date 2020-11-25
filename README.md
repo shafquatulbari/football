@@ -31,4 +31,13 @@ Why is this project of interest to me:
 - As a user, I want to be able to click a button to reveal the best player in the team based on total goals and assists.
 
 
+## User Stories for Phase 4: Task 2
+- I made appropriate use of Map interface in my code. For JSON Reader and JSON Writer, it makes use of JSONObject Class 
+and inside JSON Object class it makes use of the map interface.    
+
+## User Stories for Phase 4: Task 3
+- When I use the console application, The LeagueApp class has single field of League, Team, Player, JsonReader, JsonWriter 
+(So this is an association relationship). League class has list of type Team. Team class has list of type Player. 
+(So these are association relationships). League, Team and Player class implements Writable interface. 
+(These are dependency relationships).
 
