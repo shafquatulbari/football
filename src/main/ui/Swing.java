@@ -130,7 +130,13 @@ public class Swing extends JFrame implements ActionListener {
     // EFFECTS: loads Team from file
     private void load() {
         try {
-            team = jsonReader1.readTeam();
+            try {
+                team = jsonReader1.readTeam();
+            } catch (NotPossibleAgeException e) {
+                e.printStackTrace();
+            } catch (NotPossibleGoalsOrAssistsException e) {
+                e.printStackTrace();
+            }
             displayPlayerDetails();
         } catch (IOException e) {
             e.printStackTrace();

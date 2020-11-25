@@ -24,7 +24,7 @@ public class JsonReader {
 
     // EFFECTS: reads League from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public League read() throws IOException {
+    public League read() throws IOException, NotPossibleAgeException, NotPossibleGoalsOrAssistsException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseLeague(jsonObject);
@@ -32,7 +32,7 @@ public class JsonReader {
 
     // EFFECTS: reads Team from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public Team readTeam() throws IOException {
+    public Team readTeam() throws IOException, NotPossibleAgeException, NotPossibleGoalsOrAssistsException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseTeam(jsonObject);
@@ -52,14 +52,15 @@ public class JsonReader {
     }
 
     // EFFECTS: parses League from JSON object and returns it
-    private League parseLeague(JSONObject jsonObject) {
+    private League parseLeague(JSONObject jsonObject) throws NotPossibleAgeException,
+            NotPossibleGoalsOrAssistsException {
         League league = new League();
         addTeams(league, jsonObject);
         return league;
     }
 
     // EFFECTS: parses Team from JSON object and returns it
-    private Team parseTeam(JSONObject jsonObject) {
+    private Team parseTeam(JSONObject jsonObject) throws NotPossibleAgeException, NotPossibleGoalsOrAssistsException {
         Team team = new Team();
         addPlayers(team, jsonObject);
         return team;
@@ -67,7 +68,8 @@ public class JsonReader {
 
     // MODIFIES: league
     // EFFECTS: parses teams from JSON object and adds them to League
-    private void addTeams(League league, JSONObject jsonObject) {
+    private void addTeams(League league, JSONObject jsonObject) throws NotPossibleAgeException,
+            NotPossibleGoalsOrAssistsException {
         JSONArray jsonArray = jsonObject.getJSONArray("teams");
         for (Object json : jsonArray) {
             JSONObject nextTeam = (JSONObject) json;
@@ -77,7 +79,8 @@ public class JsonReader {
 
     // MODIFIES: league
     // EFFECTS: parses Team from JSON object and adds it to League
-    private void addTeam(League league, JSONObject jsonObject) {
+    private void addTeam(League league, JSONObject jsonObject) throws NotPossibleAgeException,
+            NotPossibleGoalsOrAssistsException {
         String name = jsonObject.getString("TeamName");
         Team team = new Team();
         team.setName(name);
@@ -87,7 +90,8 @@ public class JsonReader {
 
     // MODIFIES: team
     // EFFECTS: parses Players from JSON object and adds them to Team
-    private void addPlayers(Team team, JSONObject jsonObject) {
+    private void addPlayers(Team team, JSONObject jsonObject) throws NotPossibleAgeException,
+            NotPossibleGoalsOrAssistsException {
         JSONArray jsonArray = jsonObject.getJSONArray("list");
         for (Object json : jsonArray) {
             JSONObject nextPlayer = (JSONObject) json;
@@ -97,27 +101,16 @@ public class JsonReader {
 
     // MODIFIES: team
     // EFFECTS: parses Player from JSON object and adds it to League
-    private void addPlayer(Team team, JSONObject jsonObject) {
+    private void addPlayer(Team team, JSONObject jsonObject) throws NotPossibleAgeException,
+            NotPossibleGoalsOrAssistsException {
         String name = jsonObject.getString("Name");
         int age = jsonObject.getInt("Age");
         int assists = jsonObject.getInt("Assists");
         int goals = jsonObject.getInt("Goals");
         Player player = new Player();
-        try {
-            player.setAge(age);
-        } catch (NotPossibleAgeException e) {
-            e.printStackTrace();
-        }
-        try {
-            player.setGoals(goals);
-        } catch (NotPossibleGoalsOrAssistsException e) {
-            e.printStackTrace();
-        }
-        try {
-            player.setAssists(assists);
-        } catch (NotPossibleGoalsOrAssistsException e) {
-            e.printStackTrace();
-        }
+        player.setAge(age);
+        player.setGoals(goals);
+        player.setAssists(assists);
         player.setName(name);
         team.addPlayers(player);
     }

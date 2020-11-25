@@ -197,7 +197,13 @@ public class LeagueApp {
     // EFFECTS: loads League from file
     private void loadLeague() {
         try {
-            league = jsonReader.read();
+            try {
+                league = jsonReader.read();
+            } catch (NotPossibleAgeException e) {
+                e.printStackTrace();
+            } catch (NotPossibleGoalsOrAssistsException e) {
+                e.printStackTrace();
+            }
             System.out.println("Loaded LeagueApp from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

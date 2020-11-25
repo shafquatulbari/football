@@ -1,6 +1,7 @@
 package persistence;
 
 import exceptions.NotPossibleAgeException;
+import exceptions.NotPossibleGoalsOrAssistsException;
 import model.League;
 import model.Player;
 import model.Team;
@@ -37,7 +38,13 @@ public class JsonWriterReaderTest extends JsonTest{
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
-            league = reader.read();
+            try {
+                league = reader.read();
+            } catch (NotPossibleAgeException e) {
+                e.printStackTrace();
+            } catch (NotPossibleGoalsOrAssistsException e) {
+                e.printStackTrace();
+            }
             assertEquals(0, league.getTeams().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
@@ -66,7 +73,13 @@ public class JsonWriterReaderTest extends JsonTest{
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
-            league = reader.read();
+            try {
+                league = reader.read();
+            } catch (NotPossibleAgeException e) {
+                e.printStackTrace();
+            } catch (NotPossibleGoalsOrAssistsException e) {
+                e.printStackTrace();
+            }
             assertEquals(1, league.getTeams().size());
             checkPlayer(player1,"Messi",10,0,0);
             checkTeam(team1,"Barcelona");
@@ -86,7 +99,13 @@ public class JsonWriterReaderTest extends JsonTest{
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom2.json");
-            team = reader.readTeam();
+            try {
+                team = reader.readTeam();
+            } catch (NotPossibleAgeException e) {
+                e.printStackTrace();
+            } catch (NotPossibleGoalsOrAssistsException e) {
+                e.printStackTrace();
+            }
             assertEquals(0, team.getPlayers().size());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
