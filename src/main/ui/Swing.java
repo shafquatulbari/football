@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.NotPossibleAgeException;
+import exceptions.NotPossibleGoalsOrAssistsException;
 import model.Player;
 import model.Team;
 import persistence.JsonReader;
@@ -142,10 +144,22 @@ public class Swing extends JFrame implements ActionListener {
         String name1 = nameText.getText();
         int age1 = Integer.parseInt(ageText.getText());
         player = new Player();
-        player.setAge(age1);
+        try {
+            player.setAge(age1);
+        } catch (NotPossibleAgeException e) {
+            e.printStackTrace();
+        }
         player.setName(name1);
-        player.setAssists(assist1);
-        player.setGoals(goal1);
+        try {
+            player.setAssists(assist1);
+        } catch (NotPossibleGoalsOrAssistsException e) {
+            e.printStackTrace();
+        }
+        try {
+            player.setGoals(goal1);
+        } catch (NotPossibleGoalsOrAssistsException e) {
+            e.printStackTrace();
+        }
         team.addPlayers(player);
         displayPlayerDetails();
     }

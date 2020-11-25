@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.NotPossibleAgeException;
+import exceptions.NotPossibleGoalsOrAssistsException;
 import model.League;
 import model.Player;
 import model.Team;
@@ -53,10 +55,10 @@ public class LeagueApp {
         System.out.println("\t1--> Add team.");
         System.out.println("\t2-->select a team and add players to the team.");
         System.out.println("\t3-->select a team and view a list of the players on that team.");
-        System.out.println("\t4-->select a player on a team and add a new statistic for that player.");
+        System.out.println("\t4-->select a player add a new statistic for that player.");
         System.out.println("\t5-->show all the teams.");
         System.out.println("\t6-->SAVE.....");
-        System.out.println("\t7-->LOAD");
+        System.out.println("\t7-->LOAD.....");
     }
 
     //EFFECTS: selects the options from the user stories.
@@ -113,11 +115,23 @@ public class LeagueApp {
         Scanner in = new Scanner(System.in);
         player = selectPlayer();
         System.out.println("Let's start adding stat with number of goals:");
-        player.setGoals(in.nextInt());
+        try {
+            player.setGoals(in.nextInt());
+        } catch (NotPossibleGoalsOrAssistsException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Number of assists:");
-        player.setAssists(in.nextInt());
+        try {
+            player.setAssists(in.nextInt());
+        } catch (NotPossibleGoalsOrAssistsException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Age of Player:");
-        player.setAge(in.nextInt());
+        try {
+            player.setAge(in.nextInt());
+        } catch (NotPossibleAgeException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 

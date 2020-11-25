@@ -1,5 +1,7 @@
 package persistence;
 
+import exceptions.NotPossibleAgeException;
+import exceptions.NotPossibleGoalsOrAssistsException;
 import model.League;
 import model.Player;
 import model.Team;
@@ -101,9 +103,21 @@ public class JsonReader {
         int assists = jsonObject.getInt("Assists");
         int goals = jsonObject.getInt("Goals");
         Player player = new Player();
-        player.setAge(age);
-        player.setGoals(goals);
-        player.setAssists(assists);
+        try {
+            player.setAge(age);
+        } catch (NotPossibleAgeException e) {
+            e.printStackTrace();
+        }
+        try {
+            player.setGoals(goals);
+        } catch (NotPossibleGoalsOrAssistsException e) {
+            e.printStackTrace();
+        }
+        try {
+            player.setAssists(assists);
+        } catch (NotPossibleGoalsOrAssistsException e) {
+            e.printStackTrace();
+        }
         player.setName(name);
         team.addPlayers(player);
     }

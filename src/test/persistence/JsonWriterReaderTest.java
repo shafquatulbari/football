@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.NotPossibleAgeException;
 import model.League;
 import model.Player;
 import model.Team;
@@ -51,7 +52,11 @@ public class JsonWriterReaderTest extends JsonTest{
             team1.setName("Barcelona");
             Player player1 = new Player();
             player1.setName("Messi");
-            player1.setAge(10);
+            try {
+                player1.setAge(10);
+            } catch (NotPossibleAgeException e) {
+                //pass
+            }
             team1.addPlayers(player1);
             league.addTeam(team1);
 

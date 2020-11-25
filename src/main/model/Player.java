@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.NotPossibleAgeException;
+import exceptions.NotPossibleGoalsOrAssistsException;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -20,12 +22,11 @@ public class Player implements Writable, Comparable<Player> {
         return age;
     }
 
-    //REQUIRES: age > 0
     //MODIFIES: this
     //EFFECTS: sets this.age to age.
-    public void setAge(int age) {
+    public void setAge(int age) throws NotPossibleAgeException {
         if (age < 0) {
-            this.age = 0;
+            throw new NotPossibleAgeException("Age Not Possible!");
         } else {
             this.age = age;
         }
@@ -49,8 +50,12 @@ public class Player implements Writable, Comparable<Player> {
 
     //MODIFIES: this
     //EFFECTS: sets this.goal to goal.
-    public void setGoals(int goals) {
-        this.goals = goals;
+    public void setGoals(int goals) throws NotPossibleGoalsOrAssistsException {
+        if (goals < 0) {
+            throw new NotPossibleGoalsOrAssistsException("Assist or Goals cannot have value less than 0!");
+        } else {
+            this.goals = goals;
+        }
     }
 
     //EFFECTS: returns the no. of assists.
@@ -60,8 +65,12 @@ public class Player implements Writable, Comparable<Player> {
 
     //MODIFIES: this
     //EFFECTS: sets this.assists to assists.
-    public void setAssists(int assists) {
-        this.assists = assists;
+    public void setAssists(int assists) throws NotPossibleGoalsOrAssistsException {
+        if (assists < 0) {
+            throw new NotPossibleGoalsOrAssistsException("Assist or Goals cannot have value less than 0!");
+        } else {
+            this.assists = assists;
+        }
     }
 
     //EFFECTS: returns the String with all the stats of a player.

@@ -32,12 +32,13 @@ Why is this project of interest to me:
 
 
 ## User Stories for Phase 4: Task 2
-- I made appropriate use of Map interface in my code. For JSON Reader and JSON Writer, it makes use of JSONObject Class 
-and inside JSON Object class it makes use of the map interface.    
+- I made my Player class robust so that whenever I want to set the Player's Age, Goals, and Assists to a value less than 
+0, an exception will be thrown. I also made tests for my Player class for both cases where exception is thrown and not thrown.   
 
 ## User Stories for Phase 4: Task 3
 - When I use the console application, The LeagueApp class has single field of League, Team, Player, JsonReader, JsonWriter 
 (So this is an association relationship). League class has list of type Team. Team class has list of type Player. 
 (So these are association relationships). League, Team and Player class implements Writable interface. 
-(These are dependency relationships).
+(These are dependency relationships). Player Class throws NotPossibleAgeException which extends Extension 
+and NotPossibleGoalsOrAssistsException which also extends exception.
 
