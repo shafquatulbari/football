@@ -16,7 +16,6 @@ public class League implements Writable {
         teams = new ArrayList<>();
     }
 
-
     //MODIFIES: this
     //EFFECTS: adds a team to the arraylist.
     public void addTeam(Team team) {
