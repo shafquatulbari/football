@@ -11,6 +11,7 @@ public class League implements Writable {
     //This class represents information of football League and behaviour and attributes associated with it.
     private List<Team> teams;
 
+
     //EFFECTS: constructs a League with an empty ArrayList.
     public League() {
         teams = new ArrayList<>();
